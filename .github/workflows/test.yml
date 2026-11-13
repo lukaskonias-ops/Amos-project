@@ -1,0 +1,21 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pygame
+        run: pip install pygame-ce
+      - name: Test ALotto (Amiga BlitzBasic port)
+        run: python3 ports/alotto/test_alotto.py
+      - name: Test Gnosis (Amiga AMOS port)
+        run: python3 ports/gnosis/test_gnosis.py
